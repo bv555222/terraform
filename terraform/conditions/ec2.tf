@@ -1,6 +1,6 @@
 resource "aws_instance" "terraform_ec2" {
   ami           = var.ami_id
-  instance_type = var.instance_type
+  instance_type = var.environment == "prod" ? var.instance_type : "t3.large"
   vpc_security_group_ids = [aws_security_group.allow_all.id]
 
 
