@@ -1,12 +1,12 @@
-variable "ami_id" {
-  default = "ami-0220d79f3f480ecf5"
-}
+# variable "ami_id" {
+#   default = "ami-0220d79f3f480ecf5"
+# }
 
 ##########for "for_each" loop##########
 variable "instances" {
   type = map(string)
   default = {
-    mongodb  = "t3.micro"
+    frontend  = "t3.micro"
     mysql    = "t3.micro"
     rabbitmq = "t3.micro"
   }
@@ -76,3 +76,5 @@ variable "ingress_ports" {
     }
   ]
 }
+
+
