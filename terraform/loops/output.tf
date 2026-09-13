@@ -1,3 +1,3 @@
 output "instances_info" {
-    value = aws_instance.terraform_ec2
+  value = aws_instance.terraform_ec2
 }
