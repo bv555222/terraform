@@ -46,7 +46,7 @@ variable "domain_name" {
 }
 
 variable "zone_id" {
-  default = "Z02410043SN2ERJHCAZIJ"
+  default = "Z04650562ZM1HYVF1ZOV"
 }
 
 ###################for dynamic block########
