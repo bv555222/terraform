@@ -5,6 +5,35 @@ resource "aws_instance" "terraform_ec2" {
   instance_type          = each.value
   vpc_security_group_ids = [data.aws_security_group.default.id]
 
+  provisioner "local-exec" {
+    command = "echo ${self.private_ip} >> private_ip.txt"
+    on_failure = continue
+  }
+
+  connection {
+    type = "ssh"
+    user = "ec2-user"
+    password = "DevOps321"
+    host = self.public_ip
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum install nginx -y",
+      "sudo systemctl enable nginx",
+      "sudo systemctl start nginx"
+    ]
+  }
+    provisioner "remote-exec" {
+      when = destroy
+    inline = [
+      "sudo systemctl disable nginx",
+      "sudo systemctl stop nginx",
+      "sudo dnf remove nginx -y",
+      "echo NGINX Deleted"
+    ]
+  }
+
 # using functions
   tags = merge(
     {
